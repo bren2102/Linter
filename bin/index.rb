@@ -10,6 +10,9 @@ File.foreach("doc.xml").with_index do |line, line_num|
    if compare.evaluate_line(line) == true
      compare.compare_same_tag(line)
    end
+   if line_num == 0
+     compare.compare_first_line(line)
+   end
 end
 
 #file_data = file.readlines.map(&:chomp)

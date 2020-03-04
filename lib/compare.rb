@@ -33,4 +33,17 @@ class Compare
       puts '[ERROR] Tags do not Match'
     end
   end
+
+  def get_first_line(line)
+    return line if line[2]=='x' && line[4]=='l'
+  end
+
+  def compare_first_line(line)
+    first_line = get_first_line(line)
+    if first_line
+      puts 'First line exists'
+    else
+      puts '[WARNING]'
+    end
+  end
 end
