@@ -2,28 +2,23 @@
 require './lib/compare.rb'
 
 compare = Compare.new
-file = File.open("doc.xml")
-#file.foreach("doc.xml") { |line| puts line}
+file = File.open('doc.xml')
 
-File.foreach("doc.xml").with_index do |line, line_num|
+File.foreach(file).with_index do |line, line_num|
   puts "#{line_num}: #{line}"
-  if compare.evaluate_line(line) == true
-    compare.compare_same_tag(line)
-  end
+  compare.compare_same_tag(line) if compare.evaluate_line(line) == true
 
-  if line_num == 0
-    compare.compare_first_line(line)
-  end
+  compare.compare_first_line(line) if line_num.zero?
 
-  if compare.evaluate_multilineal_tag(line) == 1 
+  if compare.evaluate_multilineal_tag(line) == 1
     compare.get_multilineal_initial_tag(line)
   elsif compare.evaluate_multilineal_tag(line) == 2
     compare.get_multilineal_lasting_tag(line)
   end
 
+  compare.evaluate_quote_values(line) if compare.evaluate_quote_in_line(line) == true
 end
 
 compare.compare_multilineal
-#file_data = file.readlines.map(&:chomp)
-#puts file_data
+
 file.close

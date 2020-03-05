@@ -1,3 +1,5 @@
+require 'colorize'
+
 class Compare
   def initialize()
     @multilineal_tag = []
@@ -32,9 +34,9 @@ class Compare
     tag_initial = get_tag_initial(line)
     tag_end = get_tag_end(line)
     if tag_initial == tag_end
-      puts 'Tags Match'
+      puts 'Tags Match'.green
     else
-      puts '[ERROR] Tags do not Match'
+      puts '[ERROR] Tags do not Match'.red
     end
   end
 
@@ -45,9 +47,9 @@ class Compare
   def compare_first_line(line)
     first_line = get_first_line(line)
     if first_line
-      puts 'First line exists'
+      puts 'First line exists'.green
     else
-      puts '[WARNING]'
+      puts '[WARNING]'.red
     end
   end
 
@@ -62,7 +64,6 @@ class Compare
   end
 
   def get_multilineal_initial_tag(line)
-    puts line
     @multilineal_tag.push(line[(line.index('<') + 1)...line.index(' ')]) 
   end
 
@@ -71,11 +72,26 @@ class Compare
   end
 
   def compare_multilineal
-    puts @multilineal_tag
     if !@multilineal_tag.empty?
-      puts "[ERROR] open tag on #{@multilineal_tag}" 
+      puts "[ERROR] open tag on #{@multilineal_tag}".red
     else
-      puts 'No open tag found'
+      puts 'No open tag found'.green
+    end
+  end
+
+  def evaluate_quote_in_line(line)
+    if line.count('=') >= 1
+      return true
+    else
+      return false
+    end
+  end
+
+  def evaluate_quote_values(line)
+    if /[A-Za-z]+\s*=\s*\"(.)+\"/ === line
+      puts 'Exists quote'.green
+    else
+      puts 'Missing quote'.red
     end
   end
 end
