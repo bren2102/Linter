@@ -53,22 +53,34 @@ class Compare
     end
   end
 
+  def initial_multiline?(line)
+    return true if line.count('<') == 1 && line.count('>') == 1 && line.count("\/").zero? && line.count('?').zero?
+
+    false
+  end
+
+  def ending_multiline?(line)
+    return true if line.count('<') == 1 && line.count('>') == 1 && line.count("\/") == 1
+
+    false
+  end
+
   def evaluate_multilineal_tag(line)
-    if line.count('<') == 1 && line.count('>') == 1 && line.count("\/") == 0 && line.count('?') == 0
-      return 1
-    elsif line.count('<') == 1 && line.count('>') == 1 && line.count("\/") == 1
-      return 2
+    if initial_multiline?(line)
+      1
+    elsif ending_multiline?(line)
+      2
     else
-      return false
+      false
     end
   end
 
   def get_multilineal_initial_tag(line)
-    @multilineal_tag.push(line[(line.index('<') + 1)...line.index(' ')]) 
+    @multilineal_tag.push(line[(line.index('<') + 1)...line.index(' ')])
   end
 
   def get_multilineal_lasting_tag(line)
-    @multilineal_tag.delete(line[(line.index("\/") + 1)...line.index('>')]) 
+    @multilineal_tag.delete(line[(line.index("\/") + 1)...line.index('>')])
   end
 
   def compare_multilineal
@@ -80,11 +92,7 @@ class Compare
   end
 
   def evaluate_quote_in_line(line)
-    if line.count('=') >= 1
-      return true
-    else
-      return false
-    end
+    line.count('=') >= 1
   end
 
   def evaluate_quote_values(line)
