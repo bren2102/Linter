@@ -7,7 +7,7 @@ file = File.open('doc.xml')
 File.foreach(file).with_index do |line, line_num|
   puts "#{line_num}: #{line}"
   line = line.chomp
-  
+
   if compare.evaluate_line(line) == true
     compare.compare_same_tag(line)
     compare.validate_text_inside_tags(line)
