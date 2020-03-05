@@ -34,7 +34,7 @@ class Compare
     tag_initial = get_tag_initial(line)
     tag_end = get_tag_end(line)
     if tag_initial == tag_end
-      puts 'Tags Match'.green
+      puts '[OK] Tags Match'.green
     else
       puts '[ERROR] Tags do not Match'.red
     end
@@ -42,9 +42,9 @@ class Compare
 
   def validate_text_inside_tags(line)
     if /<(.)+>\s*(.)+\s*<(.)+>/ === line
-      puts 'Has text inside'.green
+      puts '[OK] Has text inside'.green
     else
-      puts 'Has no text inside'.red
+      puts '[ERROR] Has no text inside'.red
     end
   end
 
@@ -60,9 +60,9 @@ class Compare
     first_line = get_first_line(line)
     if first_line
       if both_question_mark?(line)
-        puts 'XML prolog correct syntax'.green
+        puts '[OK] XML prolog correct syntax'.green
       else
-        puts 'XML prolog incorrect syntax'.red
+        puts '[ERROR] XML prolog incorrect syntax'.red
       end
     else
       puts '[WARNING] No XML prolog'.red
@@ -101,9 +101,9 @@ class Compare
 
   def compare_multilineal
     if !@multilineal_tag.empty?
-      puts "[ERROR] open tag on #{@multilineal_tag}".red
+      puts "[ERROR] Open tag multiline on #{@multilineal_tag}".red
     else
-      puts 'No open tag found'.green
+      puts '[OK] No open tag multiline found'.green
     end
   end
 
@@ -113,9 +113,9 @@ class Compare
 
   def evaluate_quote_values(line)
     if /[A-Za-z]+\s*=\s*\"(.)+\"/ === line
-      puts 'Exists quote'.green
+      puts '[OK] Exists quote'.green
     else
-      puts 'Missing quote'.red
+      puts '[ERROR] Missing quote'.red
     end
   end
 end

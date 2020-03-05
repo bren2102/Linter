@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Movies genre = "Science Fiction">
-<Movie name = "Interstellar">
+<Movies genre = “Science Fiction”>
+<Movie name = “Interstellar”>
 <Year>2014</Year>
-<Actor character = "Cooper">Mathew McConaughey</Actor>
-<Actor character = "Dr Brand">Michael Caine</Actor>
+<Actor character = “Cooper”>Mathew McConaughey</Actor>
+<Actor character = “Dr Brand”>Michael Caine</Actor>
 <Director>Christopher Nolan</Director>
 </Movie>
-<Movie name = "Mad Max Fury Road">
+<Movie name = “Mad Max Fury Road”>
 <Year>2015</Year>
-<Actor character = "Max">Tom Hardy</Actor>
-<Actor character = "Furiosa">Charlize Theron</Actor>
+<Actor character = “Max”>Tom Hardy</Actor>
+<Actor character = “Furiosa”>Charlize Theron</Actor>
 <Director>George .S .Miller</Director>
 </Movie>
 </Movies>
