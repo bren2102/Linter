@@ -35,21 +35,28 @@ class Compare
     tag_end = get_tag_end(line)
     if tag_initial == tag_end
       puts '[OK] Tags Match'.green
+      true
     else
       puts '[ERROR] Tags do not Match'.red
+      false
     end
   end
 
   def validate_text_inside_tags(line)
     if /<(.)+>\s*(.)+\s*<(.)+>/ === line
       puts '[OK] Has text inside'.green
+      true
     else
       puts '[ERROR] Has no text inside'.red
+      false
     end
   end
 
   def get_first_line(line)
-    return line if line[2] == 'x' && line[4] == 'l'
+    if /xml/ === line
+      line
+      true
+    end
   end
 
   def both_question_mark?(line)
@@ -61,8 +68,10 @@ class Compare
     if first_line
       if both_question_mark?(line)
         puts '[OK] XML prolog correct syntax'.green
+        true
       else
         puts '[ERROR] XML prolog incorrect syntax'.red
+        false
       end
     else
       puts '[WARNING] No XML prolog'.red
@@ -102,8 +111,10 @@ class Compare
   def compare_multilineal
     if !@multilineal_tag.empty?
       puts "[ERROR] Open tag multiline on #{@multilineal_tag}".red
+      false
     else
       puts '[OK] No open tag multiline found'.green
+      true
     end
   end
 
@@ -114,8 +125,10 @@ class Compare
   def evaluate_quote_values(line)
     if /[A-Za-z]+\s*=\s*\"(.)+\"/ === line
       puts '[OK] Exists quote'.green
+      true
     else
       puts '[ERROR] Missing quote'.red
+      false
     end
   end
 end
