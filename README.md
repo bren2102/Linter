@@ -18,13 +18,29 @@ This version of the XML Begginer linter reads the ./doc.xml file included in the
 - if there are attribute values, these must always be quoted:
 - If there is a multiline node, must have starting and ending tag
 
+
 - Linter passes all tests
+
 ![screenshot](/assets/linter_approves.png)
 
 - Linter fails most of the tests
+
 ![screenshot](/assets/linter_fails.png)
 
-## Examples
+## How to use
+
+Clone or download this repository to have the linter on your computer.
+
+- If you need help cloning this repo, check more info [HERE](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository)
+
+- If you want to download it directly instead, go on the project's Github page, click on "Clone or download", and then on "Download ZIP". After this you need to extract the contents of the zip file on your computer.
+Once you have the files on your computer, go on the command line and navigate to the game directory. Once there :
+
+Change the content of the doc.xml file to suit your testing needs
+Run the linter directly from the executable file, using the command ./bin/index.rb
+Pass the index.rb file to the ruby interpreter, using the command ruby bin/index.rb
+
+## Use Examples
 
 - The XML prolog is optional. If it exists, it must come first in the document.
 ```xml
