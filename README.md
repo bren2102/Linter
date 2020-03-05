@@ -18,7 +18,6 @@ This version of the XML Begginer linter reads the ./doc.xml file included in the
 - if there are attribute values, these must always be quoted:
 - If there is a multiline node, must have starting and ending tag
 
-
 - Linter passes all tests
 
 ![screenshot](/assets/linter_approves.png)
