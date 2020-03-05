@@ -53,10 +53,7 @@ class Compare
   end
 
   def get_first_line(line)
-    if /xml/ === line
-      line
-      true
-    end
+    return true if /xml/ === line
   end
 
   def both_question_mark?(line)

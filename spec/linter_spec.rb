@@ -77,7 +77,7 @@ describe Compare do
       expect(logic.compare_first_line('<?xml version="1.0" encoding="UTF-8">')).not_to eql(true)
     end
   end
-  
+
   describe '#initial_multiline?' do
     it 'validate if the first line has question marks' do
       expect(logic.initial_multiline?('<Movie name = "Interstellar">')).to eql(true)
