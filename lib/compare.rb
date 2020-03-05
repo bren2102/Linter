@@ -1,5 +1,5 @@
 require 'colorize'
-
+# evalua si hay algo dentro de los tags
 class Compare
   def initialize()
     @multilineal_tag = []
@@ -40,16 +40,32 @@ class Compare
     end
   end
 
+  def validate_text_inside_tags(line)
+    if /<(.)+>\s*(.)+\s*<(.)+>/ === line
+      puts 'Has text inside'.green
+    else
+      puts 'Has no text inside'.red
+    end
+  end
+
   def get_first_line(line)
     return line if line[2] == 'x' && line[4] == 'l'
+  end
+
+  def both_question_mark?(line)
+    true if line[1] == '?' && line[line.length - 2] == '?'
   end
 
   def compare_first_line(line)
     first_line = get_first_line(line)
     if first_line
-      puts 'First line exists'.green
+      if both_question_mark?(line)
+        puts 'XML prolog correct syntax'.green
+      else
+        puts 'XML prolog incorrect syntax'.red
+      end
     else
-      puts '[WARNING]'.red
+      puts '[WARNING] No XML prolog'.red
     end
   end
 

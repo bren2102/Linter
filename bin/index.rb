@@ -6,7 +6,12 @@ file = File.open('doc.xml')
 
 File.foreach(file).with_index do |line, line_num|
   puts "#{line_num}: #{line}"
-  compare.compare_same_tag(line) if compare.evaluate_line(line) == true
+  line = line.chomp
+  
+  if compare.evaluate_line(line) == true
+    compare.compare_same_tag(line)
+    compare.validate_text_inside_tags(line)
+  end
 
   compare.compare_first_line(line) if line_num.zero?
 
