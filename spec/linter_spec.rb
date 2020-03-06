@@ -1,4 +1,4 @@
-require './lib/compare.rb'
+require_relative '../lib/compare.rb'
 
 describe Compare do
   let(:logic) { Compare.new }

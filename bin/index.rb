@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-require './lib/compare.rb'
+require_relative '../lib/compare.rb'
 
 compare = Compare.new
 file = File.open('doc.xml')

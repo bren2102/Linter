@@ -1,5 +1,5 @@
 require 'colorize'
-# evalua si hay algo dentro de los tags
+
 class Compare
   attr_reader :multilineal_tag
 
