@@ -1,17 +1,23 @@
 require 'colorize'
 # evalua si hay algo dentro de los tags
 class Compare
+  attr_reader :multilineal_tag
+
   def initialize()
     @multilineal_tag = []
   end
 
-  def evaluate_line(line)
-    if line.count('<') == 2 && line.count("\/") == 1 && line.count('>') == 2
-      true
-    else
-      false
-    end
+  private
+
+  def get_q_atributes(line)
+    line.count('=')
   end
+
+  def get_q_quotes(line)
+    line.count('"')
+  end
+
+  public
 
   def get_tag_initial(line)
     if line.index(' ')
@@ -28,6 +34,34 @@ class Compare
 
   def get_tag_end(line)
     line[(line.index("\/") + 1)...line.rindex('>')]
+  end
+
+  def get_first_line(line)
+    return true if /xml/ === line
+  end
+
+  def both_question_mark?(line)
+    true if line[1] == '?' && line[line.length - 2] == '?'
+  end
+
+  def initial_multiline?(line)
+    return true if line.count('<') == 1 && line.count('>') == 1 && line.count("\/").zero? && line.count('?').zero?
+
+    false
+  end
+
+  def ending_multiline?(line)
+    return true if line.count('<') == 1 && line.count('>') == 1 && line.count("\/") == 1
+
+    false
+  end
+
+  def evaluate_line(line)
+    if line.count('<') == 2 && line.count("\/") == 1 && line.count('>') == 2
+      true
+    else
+      false
+    end
   end
 
   def compare_same_tag(line)
@@ -52,14 +86,6 @@ class Compare
     end
   end
 
-  def get_first_line(line)
-    return true if /xml/ === line
-  end
-
-  def both_question_mark?(line)
-    true if line[1] == '?' && line[line.length - 2] == '?'
-  end
-
   def compare_first_line(line)
     first_line = get_first_line(line)
     if first_line
@@ -73,18 +99,6 @@ class Compare
     else
       puts '[WARNING] No XML prolog'.red
     end
-  end
-
-  def initial_multiline?(line)
-    return true if line.count('<') == 1 && line.count('>') == 1 && line.count("\/").zero? && line.count('?').zero?
-
-    false
-  end
-
-  def ending_multiline?(line)
-    return true if line.count('<') == 1 && line.count('>') == 1 && line.count("\/") == 1
-
-    false
   end
 
   def evaluate_multilineal_tag(line)
@@ -119,23 +133,14 @@ class Compare
     line.count('=') >= 1
   end
 
-  def get_q_atributes(line)
-    q_atributes = line.count('=')
-  end
-  
-  def get_q_quotes(line)
-    q_quotes = line.count('"')
-  end
-
   def evaluate_quote_values(line)
     q_atributes = get_q_atributes(line)
     q_quotes = get_q_quotes(line)
-    #if /([A-Za-z]+\s*=\s*\"(.)+\"){#{q_atributes}}/ === line
     if 2 * q_atributes == q_quotes
-      puts '[OK] Exists quote'.green
+      puts '[OK] No malformed atributes'.green
       true
     else
-      puts '[ERROR] Missing quote'.red
+      puts '[ERROR] Malformed atributes. Missing quotes'.red
       false
     end
   end

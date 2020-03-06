@@ -137,13 +137,10 @@ describe Compare do
       expect(logic.evaluate_quote_values('<Movie name = "Interstellar">')).to eql(true)
     end
     it 'validate if there are quotes on the line negative' do
-      expect(logic.evaluate_quote_values('<Year>2014</Year>')).not_to eql(true)
+      expect(logic.evaluate_quote_values('<?xml version="1.0" encoding="UTF-8?>')).not_to eql(true)
     end
     it 'validate if there are quotes on the line negative' do
       expect(logic.evaluate_quote_values('<Movie name = "Interstellar>')).not_to eql(true)
-    end
-    it 'validate if there are quotes on the line negative' do
-      expect(logic.evaluate_quote_values('</Movies>')).not_to eql(true)
     end
   end
 end
