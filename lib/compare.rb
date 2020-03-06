@@ -119,8 +119,19 @@ class Compare
     line.count('=') >= 1
   end
 
+  def get_q_atributes(line)
+    q_atributes = line.count('=')
+  end
+  
+  def get_q_quotes(line)
+    q_quotes = line.count('"')
+  end
+
   def evaluate_quote_values(line)
-    if /[A-Za-z]+\s*=\s*\"(.)+\"/ === line
+    q_atributes = get_q_atributes(line)
+    q_quotes = get_q_quotes(line)
+    #if /([A-Za-z]+\s*=\s*\"(.)+\"){#{q_atributes}}/ === line
+    if 2 * q_atributes == q_quotes
       puts '[OK] Exists quote'.green
       true
     else
