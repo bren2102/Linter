@@ -33,7 +33,9 @@ class Compare
   end
 
   def get_tag_end(line)
-    line[(line.index("\/") + 1)...line.rindex('>')]
+    return line[(line.index("\/") + 1)...line.rindex('>')] if line.index("\/")
+    
+    false
   end
 
   def get_first_line(line)
@@ -45,7 +47,7 @@ class Compare
   end
 
   def initial_multiline?(line)
-    return true if line.count('<') == 1 && line.count('>') == 1 && line.count("\/").zero? && line.count('?').zero?
+    return true if /^\s*<(.)>\s*$/ === line
 
     false
   end
@@ -57,7 +59,7 @@ class Compare
   end
 
   def evaluate_line(line)
-    if line.count('<') == 2 && line.count("\/") == 1 && line.count('>') == 2
+    if /^\s*<.+>\s*.\s*<\/.+>\s*$/ === line || /^\s*<.+>\s*.+\s*$/ === line #line.count('<') == 2 && line.count("\/") == 1 && line.count('>') == 2
       true
     else
       false
@@ -70,6 +72,9 @@ class Compare
     if tag_initial == tag_end
       puts '[OK] Tags Match'.green
       true
+    elsif tag_initial && !tag_end
+      puts '[ERROR] Missing tag end'.red
+      false
     else
       puts '[ERROR] Tags do not Match'.red
       false
@@ -80,6 +85,8 @@ class Compare
     if /<(.)+>\s*(.)+\s*<(.)+>/ === line
       puts '[OK] Has text inside'.green
       true
+    elsif /^\s*<.+>\s*.+\s*$/ === line
+      false
     else
       puts '[ERROR] Has no text inside'.red
       false
