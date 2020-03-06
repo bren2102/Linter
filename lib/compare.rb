@@ -34,7 +34,7 @@ class Compare
 
   def get_tag_end(line)
     return line[(line.index("\/") + 1)...line.rindex('>')] if line.index("\/")
-    
+
     false
   end
 
@@ -47,7 +47,7 @@ class Compare
   end
 
   def initial_multiline?(line)
-    return true if line.count('<') == 1 && line.count('>') == 1 && line.count('\/') == 0 #/^\s*<[^\/][^xml]+>\s*$/ === line
+    return true if line.count('<') == 1 && line.count('>') == 1 && line.count('\/').zero?
 
     false
   end
@@ -59,7 +59,7 @@ class Compare
   end
 
   def evaluate_line(line)
-    if /^\s*<.+>\s*.\s*<\/.+>\s*$/ === line || /^\s*<.+>\s*.+\s*$/ === line #line.count('<') == 2 && line.count("\/") == 1 && line.count('>') == 2
+    if %r{^\s*<.+>\s*.\s*</.+>\s*$} === line || /^\s*<.+>\s*.+\s*$/ === line
       true
     else
       false
@@ -93,14 +93,14 @@ class Compare
 
   def compare_first_line(line)
     first_line = get_first_line(line)
-    if first_line
-      if both_question_mark?(line)
-        puts '[OK] XML prolog correct syntax'.green
-        true
-      else
-        puts '[ERROR] XML prolog incorrect syntax'.red
-        false
-      end
+    return unless first_line
+
+    if both_question_mark?(line)
+      puts '[OK] XML prolog correct syntax'.green
+      true
+    else
+      puts '[ERROR] XML prolog incorrect syntax'.red
+      false
     end
   end
 

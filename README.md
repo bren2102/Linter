@@ -6,6 +6,12 @@ The purpose of this project is to create a linter that parses file data and info
 
 - Ruby
 
+## Requirements
+
+- Colorize 
+- Rspec
+- Rubocop
+
 ## Instructions
 
 This version of the XML Begginer linter reads the ./doc.xml file included in the project. This XML file linter will evaluate the following syntax correct:
@@ -26,18 +32,18 @@ This version of the XML Begginer linter reads the ./doc.xml file included in the
 
 ![screenshot](/assets/linter_fails.png)
 
-## How to use
+## How to run
 
-Clone or download this repository to have the linter on your computer.
+First of all, Clone or download this repository to have the linter on your computer.
 
-- If you need help cloning this repo, check more info [HERE](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository)
+- To clone the repo, go on the project's Github page, click on "Clone or download", copy the contents of the text box, and then run git clone "repo" on the command line, where "repo" is the text you just copied. If you need further help cloning this repo, check more info [HERE](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository)
 
 - If you want to download it directly instead, go on the project's Github page, click on "Clone or download", and then on "Download ZIP". After this you need to extract the contents of the zip file on your computer.
 Once you have the files on your computer, go on the command line and navigate to the game directory. Once there :
 
 Change the content of the doc.xml file to suit your testing needs
-Run the linter directly from the executable file, using the command ./bin/index.rb
-Pass the index.rb file to the ruby interpreter, using the command ruby bin/index.rb
+- Run the linter directly from the executable file, using the command ./bin/index.rb
+- Pass the index.rb file to the ruby interpreter, using the command ruby bin/index.rb
 
 ## Use Examples
 
@@ -46,9 +52,9 @@ Pass the index.rb file to the ruby interpreter, using the command ruby bin/index
 ```xml
   <?xml version="1.0" encoding="UTF-8"?>              [Correct] [OK] XML prolog correct syntax
 
-  <xml version="1.0" encoding="UTF-8">                [Incorrect] [ERROR] Malformed atributes. Missing quotes
+  <xml version="1.0" encoding="UTF-8">                [Incorrect] [ERROR] XML prolog incorrect syntax
 
-  <xml version="1.0" encoding="UTF-8"?>               [Incorrect] [ERROR] Malformed atributes. Missing quotes
+  <xml version="1.0" encoding="UTF-8"?>               [Incorrect] [ERROR] XML prolog incorrect syntax
 ```
 - In XML, it is illegal to omit the closing tag. All elements must have a closing tag
 ```xml
