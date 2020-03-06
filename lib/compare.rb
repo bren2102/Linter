@@ -82,12 +82,10 @@ class Compare
   end
 
   def validate_text_inside_tags(line)
-    if /<(.)+>\s*(.)+\s*<(.)+>/ === line
+    if /<.+>\s*.+\s*<.+>/ === line
       puts '[OK] Has text inside'.green
       true
-    elsif /^\s*<.+>\s*.+\s*$/ === line
-      false
-    else
+    elsif /<.+>\s*<.+>/ === line
       puts '[ERROR] Has no text inside'.red
       false
     end

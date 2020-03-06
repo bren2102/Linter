@@ -44,39 +44,41 @@ Pass the index.rb file to the ruby interpreter, using the command ruby bin/index
 ```
 - If the XML prolog exists must have the correct structure at the beggining and the end
 ```xml
-  <?xml version="1.0" encoding="UTF-8"?>              [Correct]
+  <?xml version="1.0" encoding="UTF-8"?>              [Correct] [OK] XML prolog correct syntax
 
   <xml version="1.0" encoding="UTF-8">                [Incorrect] [ERROR] Malformed atributes. Missing quotes
+
+  <xml version="1.0" encoding="UTF-8"?>               [Incorrect] [ERROR] Malformed atributes. Missing quotes
 ```
 - In XML, it is illegal to omit the closing tag. All elements must have a closing tag
 ```xml
-  <Year>2015</Year>                                   [Correct]
+  <Year>2015</Year>                                   [Correct] [OK] Tags Match
   
-  <Year>2015                                          [Incorrect]
+  <Year>2015                                          [Incorrect] [ERROR] Missing tag end
 ```
 - XML tags are case sensitive. The tag 'Director' is different from the tag 'director'.
 ```xml
-  <Director>George .S .Miller</Director>              [Correct]
+  <Director>George .S .Miller</Director>              [Correct] [OK] Tags Match
   
-  <Director>George .S .Miller</director>              [Incorrect]
+  <Director>George .S .Miller</director>              [Incorrect] [ERROR] Tags do not Match
 ```
 - XML tags must contain text inside.
 ```xml
-  <Actor character = "Dr Brand">Michael Caine</Actor> [Correct]
+  <Actor character = "Dr Brand">Michael Caine</Actor> [Correct] [OK] Has text inside
   
-  <Actor character = "Dr Brand"></Actor>              [Incorrect]
+  <Actor character = "Dr Brand"></Actor>              [Incorrect] [ERROR] Has no text inside
 ```
 - In XML, the attribute values must always be quoted:
 ```xml
   <note date="12/11/2007">
   <to>Tove</to>
   <from>Jani</from>
-  </note>                                             [Correct]
+  </note>                                             [Correct] [OK] No malformed atributes
   
   <note date=12/11/2007>
   <to>Tove</to>
   <from>Jani</from>
-  </note>                                             [Incorrect]
+  </note>                                             [Incorrect] [ERROR] Malformed atributes. Missing quotes'
 ```
 - Multiline nodes must always have a starting and ending tag
 ```xml
@@ -86,14 +88,14 @@ Pass the index.rb file to the ruby interpreter, using the command ruby bin/index
   <from>Jani</from>
   <heading>Reminder</heading>
   <body>Don't forget me this weekend!</body>
-  </note>                                             [Correct]
+  </note>                                             [Correct] [OK] No open tag multiline found
 
   <?xml version="1.0" encoding="UTF-8"?>
   <note>
   <to>Tove</to>
   <from>Jani</from>
   <heading>Reminder</heading>
-  <body>Don't forget me this weekend!</body>          [Incorrect]
+  <body>Don't forget me this weekend!</body>          [Incorrect] [ERROR] Open tag multiline on ["note"]
 ```
 ## Author
 
