@@ -47,7 +47,7 @@ class Compare
   end
 
   def initial_multiline?(line)
-    return true if /^\s*<(.)>\s*$/ === line
+    return true if line.count('<') == 1 && line.count('>') == 1 && line.count('\/') == 0 #/^\s*<[^\/][^xml]+>\s*$/ === line
 
     false
   end
@@ -103,8 +103,6 @@ class Compare
         puts '[ERROR] XML prolog incorrect syntax'.red
         false
       end
-    else
-      puts '[WARNING] No XML prolog'.red
     end
   end
 

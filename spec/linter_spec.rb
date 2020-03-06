@@ -79,10 +79,10 @@ describe Compare do
   end
 
   describe '#initial_multiline?' do
-    it 'validate if the first line has question marks' do
+    it 'validate if is the inital of multiline' do
       expect(logic.initial_multiline?('<Movie name = "Interstellar">')).to eql(true)
     end
-    it 'validate if the first line has question marks negative' do
+    it 'validate if is the inital of multiline negative' do
       expect(logic.initial_multiline?('<Director>Christopher Nolan</Director>')).not_to eql(true)
     end
   end

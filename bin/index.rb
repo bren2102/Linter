@@ -15,7 +15,7 @@ File.foreach(file).with_index do |line, line_num|
 
   compare.compare_first_line(line) if line_num.zero?
 
-  if compare.evaluate_multilineal_tag(line) == 1
+  if compare.evaluate_multilineal_tag(line) == 1 && !line_num.zero? && compare.evaluate_line(line) == false
     compare.get_multilineal_initial_tag(line)
   elsif compare.evaluate_multilineal_tag(line) == 2
     compare.get_multilineal_lasting_tag(line)

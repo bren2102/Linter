@@ -41,20 +41,12 @@ Pass the index.rb file to the ruby interpreter, using the command ruby bin/index
 
 ## Use Examples
 
-- The XML prolog is optional. If it exists, it must come first in the document.
-```xml
-  <?xml version="1.0" encoding="UTF-8"?>              [Correct]
-
-  <xml version="1.0" encoding="UTF-8">                [Incorrect]
-
-  <Movies>
-  <?xml version="1.0" encoding="UTF-8"?>              [Incorrect]
 ```
 - If the XML prolog exists must have the correct structure at the beggining and the end
 ```xml
   <?xml version="1.0" encoding="UTF-8"?>              [Correct]
 
-  <xml version="1.0" encoding="UTF-8">                [Incorrect]
+  <xml version="1.0" encoding="UTF-8">                [Incorrect] [ERROR] Malformed atributes. Missing quotes
 ```
 - In XML, it is illegal to omit the closing tag. All elements must have a closing tag
 ```xml
